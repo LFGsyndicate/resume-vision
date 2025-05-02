@@ -1,21 +1,17 @@
-# .github/workflows/static.yml
 name: Deploy static content to Pages
 
 on:
-  # Запускать при пуше в ветку main
   push:
-    branches: ["main"]
+    branches: ["main"] # Запускать при пуше в main
+  workflow_dispatch: # Позволяет запускать вручную
 
-  # Позволяет запускать вручную из вкладки Actions
-  workflow_dispatch:
-
-# Устанавливаем права для GITHUB_TOKEN, чтобы разрешить деплой на GitHub Pages
+# Права доступа для GITHUB_TOKEN
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Разрешаем только один одновременный деплой, отменяя предыдущие запуски
+# Один одновременный деплой
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -30,17 +26,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Если используете Bun
+      # Используем Bun
       - name: Set up Bun
         uses: oven-sh/setup-bun@v1
         with:
-          bun-version: latest # или конкретная версия
+          bun-version: latest
 
       - name: Install dependencies
-        run: bun install # Используем bun install
+        run: bun install # Установка зависимостей
 
       - name: Build
-        run: bun run build # Используем bun run build (убедитесь, что скрипт build есть в package.json)
+        # Запускаем скрипт 'build' из package.json
+        # Он должен выполнить 'tsc && vite build'
+        run: bun run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -48,7 +46,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Загружаем из стандартной папки сборки Vite (dist)
+          # Загружаем из папки 'dist' (стандартная для Vite)
           path: './dist'
 
       - name: Deploy to GitHub Pages
