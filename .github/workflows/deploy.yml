@@ -1,0 +1,64 @@
+# Имя workflow, отображаемое в GitHub Actions (обновлено для ясности)
+name: Deploy to GitHub Pages
+
+on:
+  # Запускать при пуше в ветку main
+  push:
+    branches: ["main"]
+
+  # Позволяет запускать вручную из вкладки Actions
+  workflow_dispatch:
+
+# Устанавливаем права для GITHUB_TOKEN, чтобы разрешить деплой на GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Разрешаем только один одновременный деплой, отменяя предыдущие запуски
+# Группа "pages" не зависит от имени файла workflow, так что ее менять не нужно.
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # Задача сборки и деплоя
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # Шаг 1: Получение кода из репозитория
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Шаг 2: Настройка среды выполнения Bun
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest # или ваша конкретная версия
+
+      # Шаг 3: Установка зависимостей
+      - name: Install dependencies
+        run: bun install
+
+      # Шаг 4: Сборка проекта (выполняет 'tsc && vite build' из package.json)
+      - name: Build
+        run: bun run build
+
+      # Шаг 5: Настройка GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      # Шаг 6: Загрузка артефакта сборки (из папки dist) для GitHub Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Загружаем из стандартной папки сборки Vite (dist)
+          path: './dist'
+
+      # Шаг 7: Деплой на GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
