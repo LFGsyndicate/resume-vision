@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ResumeData } from '../lib/resume-data';
+import { ResumeData, Language } from '../lib/resume-data';
 import AnimatedText from './AnimatedText';
 import { 
   Award, 
@@ -27,45 +27,46 @@ import {
 
 interface SummarySectionProps {
   data: ResumeData;
+  lang: Language;
 }
 
-const SummarySection: React.FC<SummarySectionProps> = ({ data }) => {
+const SummarySection: React.FC<SummarySectionProps> = ({ data, lang }) => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
   
   // Key highlights from the summary text
   const highlights = [
     {
       icon: Briefcase,
-      title: data.lang === 'en' ? 'Leadership' : 'Лидерство',
-      description: data.lang === 'en' 
+      title: lang === 'en' ? 'Leadership' : 'Лидерство',
+      description: lang === 'en' 
         ? 'Founded and scaled VTRENDE LLC and LAXIO LTD, driving profitability and efficiency.'
         : 'Основал и масштабировал VTRENDE LLC и LAXIO LTD, повышая прибыльность и эффективность.'
     },
     {
       icon: Brain,
-      title: data.lang === 'en' ? 'AI & ML' : 'ИИ и ML',
-      description: data.lang === 'en' 
+      title: lang === 'en' ? 'AI & ML' : 'ИИ и ML',
+      description: lang === 'en' 
         ? 'Expertise in foundational models (OpenAI, Gemini, Claude) and ML frameworks.'
         : 'Экспертиза в фундаментальных моделях (OpenAI, Gemini, Claude) и ML фреймворках.'
     },
     {
       icon: Code,
-      title: data.lang === 'en' ? 'Full-Stack' : 'Full-Stack',
-      description: data.lang === 'en' 
+      title: lang === 'en' ? 'Full-Stack' : 'Full-Stack',
+      description: lang === 'en' 
         ? 'Modern frameworks (React, Node.js, Python, .NET) and API design.'
         : 'Современные фреймворки (React, Node.js, Python, .NET) и проектирование API.'
     },
     {
       icon: Cloud,
-      title: data.lang === 'en' ? 'Cloud & DevOps' : 'Облако и DevOps',
-      description: data.lang === 'en'
+      title: lang === 'en' ? 'Cloud & DevOps' : 'Облако и DevOps',
+      description: lang === 'en'
         ? 'AWS, GCP, Azure architecture, Docker, K8s, Terraform, and CI/CD.'
         : 'AWS, GCP, Azure архитектура, Docker, K8s, Terraform и CI/CD.'
     },
     {
       icon: Layers,
-      title: data.lang === 'en' ? 'Blockchain & Web3' : 'Блокчейн и Web3',
-      description: data.lang === 'en'
+      title: lang === 'en' ? 'Blockchain & Web3' : 'Блокчейн и Web3',
+      description: lang === 'en'
         ? 'Solidity, Web3 libraries, DAO governance frameworks, and security.'
         : 'Solidity, Web3 библиотеки, DAO фреймворки управления и безопасность.'
     }
@@ -161,8 +162,8 @@ const SummarySection: React.FC<SummarySectionProps> = ({ data }) => {
         >
           <span className="mr-1 text-sm font-medium">
             {expandedSection === 'summary' ? 
-              (data.lang === 'en' ? 'Read Less' : 'Свернуть') : 
-              (data.lang === 'en' ? 'Read More' : 'Читать далее')}
+              (lang === 'en' ? 'Read Less' : 'Свернуть') : 
+              (lang === 'en' ? 'Read More' : 'Читать далее')}
           </span>
           <motion.div
             animate={{ rotate: expandedSection === 'summary' ? 180 : 0 }}
@@ -182,7 +183,7 @@ const SummarySection: React.FC<SummarySectionProps> = ({ data }) => {
           className="text-xl font-medium mb-4 text-gray-800 dark:text-gray-100 pl-2 border-l-2 border-resume-primary"
           variants={itemVariants}
         >
-          {data.lang === 'en' ? 'Key Areas of Expertise' : 'Ключевые области экспертизы'}
+          {lang === 'en' ? 'Key Areas of Expertise' : 'Ключевые области экспертизы'}
         </motion.h3>
 
         <Carousel 
@@ -258,7 +259,7 @@ const SummarySection: React.FC<SummarySectionProps> = ({ data }) => {
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
               >
-                <span className="mr-1">{data.lang === 'en' ? 'View all' : 'Показать все'}</span>
+                <span className="mr-1">{lang === 'en' ? 'View all' : 'Показать все'}</span>
                 <ChevronRight className="h-3 w-3" />
               </motion.a>
             </motion.div>

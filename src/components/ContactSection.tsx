@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ResumeData } from '../lib/resume-data';
 import AnimatedText from './AnimatedText';
-import { Mail, Linkedin, Send, ExternalLink } from 'lucide-react';
+import { Mail, Linkedin, Send } from 'lucide-react';
 
 interface ContactSectionProps {
   data: ResumeData;
@@ -43,7 +43,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
           delay={0.3}
         />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <motion.a
             href={`mailto:${data.contact.email}`}
             className="contact-button"
@@ -85,21 +85,6 @@ const ContactSection: React.FC<ContactSectionProps> = ({ data }) => {
           >
             <Send className="h-5 w-5" />
             <span>{data.contactSection.messageTelegram}</span>
-          </motion.a>
-          
-          <motion.a
-            href={data.contact.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-button"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.7 }}
-          >
-            <ExternalLink className="h-5 w-5" />
-            <span>{data.contactSection.visitWebsite}</span>
           </motion.a>
         </div>
       </motion.div>

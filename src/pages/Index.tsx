@@ -103,7 +103,7 @@ const Index = () => {
             transition={pageTransition}
             className="mt-8 space-y-12"
           >
-            <SummarySection data={currentData} />
+            <SummarySection data={currentData} lang={lang} />
             <ExperienceSection data={currentData} lang={lang} />
             <SkillsSection data={currentData} lang={lang} isDarkMode={isDarkMode} />
             <EducationSection data={currentData} lang={lang} />

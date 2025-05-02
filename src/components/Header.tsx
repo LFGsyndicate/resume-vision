@@ -1,9 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import { Language, ResumeData } from '../lib/resume-data';
-import { Mail, Linkedin, Send, MapPin, Menu, X, Sun, Moon, Globe, ChevronDown } from 'lucide-react';
+import { Mail, Linkedin, Send, MapPin, Menu, X, Sun, Moon, Globe } from 'lucide-react';
 import AnimatedText from './AnimatedText';
 
 interface HeaderProps {
@@ -17,18 +17,6 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggleDarkMode }) => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
   
   const headerVariants = {
     initial: { opacity: 0, y: -20 },
@@ -76,9 +64,7 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
 
   return (
     <motion.header 
-      className={`py-6 md:py-8 sticky top-0 z-30 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md' : ''
-      }`}
+      className="py-6 md:py-8 z-20 bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm"
       variants={headerVariants}
       initial="initial"
       animate="animate"
@@ -127,9 +113,8 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
           className="flex flex-col md:items-end space-y-2 mt-4 md:mt-0"
           variants={itemVariants}
         >
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 justify-center md:justify-end">
             <motion.div
-              className="relative"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
@@ -158,7 +143,7 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
             </motion.button>
           </div>
 
-          <div className="flex space-x-4 mt-2">
+          <div className="flex space-x-4 mt-2 justify-center md:justify-end">
             <motion.a
               href={`mailto:${data.contact.email}`}
               whileHover={{ scale: 1.1, y: -3 }}
@@ -238,7 +223,7 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
       <AnimatePresence>
         {isMobile && mobileMenuOpen && (
           <motion.div
-            className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg rounded-b-lg border-t border-gray-200 dark:border-gray-700 py-2 px-4 z-50"
+            className="md:hidden absolute left-0 right-0 bg-white dark:bg-gray-900 shadow-lg rounded-b-lg border-t border-gray-200 dark:border-gray-700 py-2 px-4 z-50"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
