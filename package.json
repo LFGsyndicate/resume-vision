@@ -1,14 +1,12 @@
 {
-  "name": "resume-vision", // Изменил имя на имя вашего репозитория - хорошая практика
+  "name": "resume-vision",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    // Добавили 'tsc &&' для проверки типов перед сборкой
     "build": "tsc && vite build",
-    "build:dev": "tsc && vite build --mode development", // Также добавил tsc сюда
-    // Можно сделать линтинг более строгим, если ваш eslint.config.js это поддерживает
+    "build:dev": "tsc && vite build --mode development",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -76,10 +74,7 @@
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.9.0",
-    // Обновил плагин react-hooks до стабильной версии, если доступна (проверьте актуальную)
-    // Если используете React 18+, 'eslint-plugin-react-hooks' часто идет с самим React или фреймворком
-    // "eslint-plugin-react-hooks": "^4.6.2", // Пример стабильной версии, проверьте последнюю
-    "eslint-plugin-react-refresh": "^0.4.9", // Оставил как есть
+    "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
     "lovable-tagger": "^1.1.7",
     "postcss": "^8.4.47",
