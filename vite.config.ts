@@ -1,3 +1,4 @@
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
@@ -25,8 +26,7 @@ export default defineConfig(({ command, mode }) => { // Добавили command
 
   // !!! ВАЖНО: Устанавливаем base только для ПРОДАКШН-СБОРКИ !!!
   if (command === 'build') {
-    // Убедитесь, что имя репозитория ТОЧНО 'resume-vision'
-    // Путь должен начинаться и заканчиваться слэшем '/'
+    // Ресурсы будут доступны по пути /resume-vision/ для GitHub Pages
     config.base = '/resume-vision/';
   }
 

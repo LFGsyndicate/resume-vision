@@ -12,12 +12,15 @@ const App = () => {
   // Create a client instance in the component
   const [queryClient] = useState(() => new QueryClient());
   
+  // Get the basename for the router based on environment
+  const basename = import.meta.env.MODE === 'production' ? '/resume-vision' : '/';
+  
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename={basename}>
           <Routes>
             <Route path="/" element={<Index />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

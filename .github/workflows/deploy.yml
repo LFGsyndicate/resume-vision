@@ -1,3 +1,4 @@
+
 # Имя workflow, отображаемое в GitHub Actions (обновлено для ясности)
 name: Deploy to GitHub Pages
 
