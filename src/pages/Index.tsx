@@ -23,6 +23,7 @@ const Index = () => {
   );
   const [isChangingLang, setIsChangingLang] = useState(false);
   
+  // Use type assertion to handle Russian and English data with different structure
   const currentData = resumeData[lang];
   
   useEffect(() => {
