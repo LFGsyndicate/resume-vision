@@ -28,8 +28,84 @@ import {
   Info,
 } from "lucide-react";
 
+// Define key types for better type safety
+export type Language = "en" | "ru";
+
+// Define the skill level item structure to be consistent across languages
+export type SkillLevelItem = {
+  skill: string;
+  level: number;
+};
+
+// Define a more flexible ResumeData type that works for both languages
+export interface ResumeData {
+  name: string;
+  headline: string;
+  location: string;
+  contact: {
+    email: string;
+    linkedin: string;
+    telegram: string;
+    website: string;
+  };
+  navigation: {
+    summary: string;
+    experience: string;
+    skills: string;
+    education: string;
+    languages: string;
+    referencesNote: string;
+    contact: string;
+  };
+  summary: string;
+  referencesNote: {
+    title: string;
+    text: string;
+  };
+  experience: Array<{
+    title: string;
+    company: string;
+    location: string;
+    period: string;
+    description: string;
+    achievements: string[];
+    tags: string[];
+  }>;
+  skillLevels: {
+    [key: string]: SkillLevelItem[];
+  };
+  skills: {
+    [key: string]: string[];
+  };
+  education: Array<{
+    institution: string;
+    location?: string;
+    degree: string;
+    period: string;
+    focus?: string[];
+    courses?: string[];
+  }>;
+  languages: Array<{
+    lang: string;
+    level: string;
+    icon: any;
+  }>;
+  contactSection: {
+    title: string;
+    description: string;
+    emailMe: string;
+    connectLinkedIn: string;
+    messageTelegram: string;
+    visitWebsite?: string;
+  };
+  footer: string;
+  skillIcons: {
+    [key: string]: any;
+  };
+}
+
 // Resume data for both English and Russian languages
-export const resumeData = {
+export const resumeData: Record<Language, ResumeData> = {
   en: {
     name: "Cyril Lamdan",
     headline: "Visionary CEO & AI-Driven Full-Stack Developer | 19+ Years Driving Tech Innovation, Profitability & Startup Growth",
@@ -460,6 +536,3 @@ export const resumeData = {
     }
   }
 };
-
-export type Language = "en" | "ru";
-export type ResumeData = typeof resumeData.en;
