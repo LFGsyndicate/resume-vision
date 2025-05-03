@@ -1,8 +1,9 @@
+
 import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, CircleDot } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -26,6 +27,9 @@ type CarouselContextProps = {
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
+  scrollTo: (index: number) => void
+  selectedIndex: number
+  scrollSnaps: number[]
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -65,6 +69,12 @@ const Carousel = React.forwardRef<
     )
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
+    const [selectedIndex, setSelectedIndex] = React.useState(0)
+    const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
+
+    const scrollTo = React.useCallback((index: number) => {
+      api?.scrollTo(index)
+    }, [api])
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -73,6 +83,7 @@ const Carousel = React.forwardRef<
 
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
+      setSelectedIndex(api.selectedScrollSnap())
     }, [])
 
     const scrollPrev = React.useCallback(() => {
@@ -110,7 +121,10 @@ const Carousel = React.forwardRef<
       }
 
       onSelect(api)
+      setScrollSnaps(api.scrollSnapList())
+      
       api.on("reInit", onSelect)
+      api.on("reInit", () => setScrollSnaps(api.scrollSnapList()))
       api.on("select", onSelect)
 
       return () => {
@@ -130,6 +144,9 @@ const Carousel = React.forwardRef<
           scrollNext,
           canScrollPrev,
           canScrollNext,
+          scrollTo,
+          selectedIndex,
+          scrollSnaps,
         }}
       >
         <div
@@ -250,6 +267,41 @@ const CarouselNext = React.forwardRef<
 })
 CarouselNext.displayName = "CarouselNext"
 
+const CarouselDots = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { scrollTo, selectedIndex, scrollSnaps } = useCarousel()
+
+  return (
+    <div
+      ref={ref}
+      className={cn("flex justify-center gap-1 mt-4", className)}
+      {...props}
+    >
+      {scrollSnaps.map((_, index) => (
+        <Button
+          key={index}
+          variant="ghost"
+          size="sm"
+          className={cn(
+            "h-6 w-6 p-0 rounded-full",
+            selectedIndex === index ? "opacity-100" : "opacity-50"
+          )}
+          onClick={() => scrollTo(index)}
+        >
+          <CircleDot className={cn(
+            "h-3 w-3",
+            selectedIndex === index ? "text-primary" : "text-muted-foreground"
+          )} />
+          <span className="sr-only">Go to slide {index + 1}</span>
+        </Button>
+      ))}
+    </div>
+  )
+})
+CarouselDots.displayName = "CarouselDots"
+
 export {
   type CarouselApi,
   Carousel,
@@ -257,4 +309,5 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselDots,
 }
