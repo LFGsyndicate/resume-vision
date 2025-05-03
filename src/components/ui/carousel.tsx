@@ -128,8 +128,8 @@ const Carousel = React.forwardRef<
       api.on("select", onSelect)
 
       return () => {
-        api?.off("select", onSelect)
-        api?.off("reInit", onSelect)
+        api.off("select", onSelect)
+        api.off("reInit", onSelect)
       }
     }, [api, onSelect])
 
@@ -214,20 +214,14 @@ const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  const { scrollPrev, canScrollPrev } = useCarousel()
 
   return (
     <Button
       ref={ref}
       variant={variant}
       size={size}
-      className={cn(
-        "absolute rounded-full",
-        orientation === "horizontal"
-          ? "-left-6 top-1/2 -translate-y-1/2"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
-        className
-      )}
+      className={cn("rounded-full", className)}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
@@ -243,20 +237,14 @@ const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const { scrollNext, canScrollNext } = useCarousel()
 
   return (
     <Button
       ref={ref}
       variant={variant}
       size={size}
-      className={cn(
-        "absolute rounded-full",
-        orientation === "horizontal"
-          ? "-right-6 top-1/2 -translate-y-1/2"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
-        className
-      )}
+      className={cn("rounded-full", className)}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
@@ -277,7 +265,7 @@ const CarouselDots = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={cn("flex justify-center gap-1 mt-4", className)}
+      className={cn("flex justify-center gap-1", className)}
       {...props}
     >
       {scrollSnaps.map((_, index) => (

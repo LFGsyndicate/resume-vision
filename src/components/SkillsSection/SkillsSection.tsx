@@ -84,9 +84,11 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ data, lang, isDarkMode })
             })}
           </CarouselContent>
           
-          <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" />
-          <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" />
-          <CarouselDots />
+          <div className="flex justify-center items-center gap-2 mt-4">
+            <CarouselPrevious className="relative static h-8 w-8 translate-y-0 translate-x-0 rounded-full" />
+            <CarouselDots />
+            <CarouselNext className="relative static h-8 w-8 translate-y-0 translate-x-0 rounded-full" />
+          </div>
         </Carousel>
       </div>
       
