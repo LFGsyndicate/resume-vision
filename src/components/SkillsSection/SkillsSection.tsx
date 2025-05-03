@@ -9,7 +9,9 @@ import {
   Carousel, 
   CarouselContent, 
   CarouselItem, 
-  CarouselDots 
+  CarouselDots,
+  CarouselPrevious,
+  CarouselNext 
 } from '@/components/ui/carousel';
 
 interface SkillsSectionProps {
@@ -46,42 +48,47 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ data, lang, isDarkMode })
       </motion.h2>
       
       {/* Radar Charts for Key Skill Areas with Carousel */}
-      <Carousel
-        opts={{
-          align: 'start',
-          loop: false,
-        }}
-        className="w-full"
-      >
-        <CarouselContent>
-          {skillCategories.map((category, index) => {
-            const Icon = data.skillIcons[category] || Zap;
-            const categoryData = data.skillLevels[category];
-            
-            if (!categoryData) return null;
-            
-            return (
-              <CarouselItem key={category} className="md:basis-1/2 lg:basis-1/3">
-                <motion.div
-                  className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <h3 className="text-md font-semibold mb-3 text-resume-primary dark:text-resume-muted flex items-center">
-                    <Icon size={18} className="mr-2" />
-                    <AnimatedText text={category} />
-                  </h3>
-                  
-                  <RadarSkillChart data={categoryData} isDarkMode={isDarkMode} />
-                </motion.div>
-              </CarouselItem>
-            );
-          })}
-        </CarouselContent>
-        <CarouselDots />
-      </Carousel>
+      <div className="relative">
+        <Carousel
+          opts={{
+            align: 'start',
+            loop: false,
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {skillCategories.map((category, index) => {
+              const Icon = data.skillIcons[category] || Zap;
+              const categoryData = data.skillLevels[category];
+              
+              if (!categoryData) return null;
+              
+              return (
+                <CarouselItem key={category} className="md:basis-1/2 lg:basis-1/3">
+                  <motion.div
+                    className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <h3 className="text-md font-semibold mb-3 text-resume-primary dark:text-resume-muted flex items-center">
+                      <Icon size={18} className="mr-2" />
+                      <AnimatedText text={category} />
+                    </h3>
+                    
+                    <RadarSkillChart data={categoryData} isDarkMode={isDarkMode} />
+                  </motion.div>
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+          
+          <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2 h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" />
+          <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2 h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" />
+          <CarouselDots />
+        </Carousel>
+      </div>
       
       {/* Detailed Skills Lists */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
