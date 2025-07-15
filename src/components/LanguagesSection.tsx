@@ -43,7 +43,7 @@ const LanguagesSection: React.FC<LanguagesSectionProps> = ({ data }) => {
             whileHover={{ scale: 1.03 }}
           >
             <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full mr-4">
-              <LangIcon className="h-6 w-6 text-resume-primary dark:text-resume-muted" />
+              <LangIcon className="h-6 w-6 text-ocean-500 dark:text-seagreen-400" />
             </div>
             
             <div>

@@ -64,10 +64,59 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				resume: {
-					primary: '#0891b2', // cyan-600
-					secondary: '#06b6d4', // cyan-500
-					accent: '#0e7490', // cyan-700
-					muted: '#67e8f9', // cyan-300
+					primary: '#227C9D', // Ocean Blue
+					secondary: '#17C3B2', // Light Sea Green
+					accent: '#FFCB77', // Sunset
+					warning: '#FE6D73', // Light Red
+					background: '#FEF9EF', // Floral White
+				},
+				ocean: {
+					50: '#f0f9ff',
+					100: '#e0f2fe',
+					200: '#bae6fd',
+					300: '#7dd3fc',
+					400: '#38bdf8',
+					500: '#227C9D',
+					600: '#1e6b85',
+					700: '#1a5a6d',
+					800: '#164e5b',
+					900: '#0c2d36',
+				},
+				seagreen: {
+					50: '#f0fdfa',
+					100: '#ccfbf1',
+					200: '#99f6e4',
+					300: '#5eead4',
+					400: '#2dd4bf',
+					500: '#17C3B2',
+					600: '#14a896',
+					700: '#118d7a',
+					800: '#0f766e',
+					900: '#134e4a',
+				},
+				sunset: {
+					50: '#fffbeb',
+					100: '#fef3c7',
+					200: '#fde68a',
+					300: '#fcd34d',
+					400: '#fbbf24',
+					500: '#FFCB77',
+					600: '#e6b66b',
+					700: '#cca15f',
+					800: '#b8935a',
+					900: '#92734a',
+				},
+				coral: {
+					50: '#fef2f2',
+					100: '#fee2e2',
+					200: '#fecaca',
+					300: '#fca5a5',
+					400: '#f87171',
+					500: '#FE6D73',
+					600: '#e56267',
+					700: '#cc575b',
+					800: '#b91c1c',
+					900: '#991b1b',
 				}
 			},
 			borderRadius: {

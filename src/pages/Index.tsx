@@ -81,7 +81,7 @@ const Index = () => {
   };
   
   return (
-    <div className={`font-sans min-h-screen ${isDarkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`font-sans min-h-screen ${isDarkMode ? 'dark bg-gray-900' : 'bg-background'}`}>
       <ParticlesBackground isDarkMode={isDarkMode} />
       
       <div className="container mx-auto px-4 py-8 max-w-4xl relative z-10">

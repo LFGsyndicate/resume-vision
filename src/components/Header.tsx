@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
         <div className="flex justify-between items-center">
           <motion.div variants={logoVariants} className="flex flex-col">
             <motion.h1 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 bg-gradient-to-r from-resume-primary to-resume-accent dark:from-resume-muted dark:to-cyan-300 bg-clip-text text-transparent"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 bg-gradient-to-r from-ocean-500 to-sunset-500 dark:from-seagreen-400 dark:to-sunset-400 bg-clip-text text-transparent"
               initial={{ opacity: 0, x: -20 }}
               animate={{ 
                 opacity: 1, 
@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
               className="flex items-center text-gray-600 dark:text-gray-300 text-sm" 
               variants={itemVariants}
             >
-              <MapPin className="h-4 w-4 mr-1 text-resume-primary dark:text-resume-muted" />
+              <MapPin className="h-4 w-4 mr-1 text-ocean-500 dark:text-seagreen-400" />
               <span>{data.location}</span>
             </motion.div>
           </motion.div>
@@ -101,19 +101,21 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
           {isMobile && (
             <motion.button
               variants={itemVariants}
-              className="md:hidden text-gray-700 dark:text-gray-300 p-2 rounded-md"
+              className="mobile-menu-button md:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={24} className="text-ocean-500" /> : <Menu size={24} className="text-ocean-500" />}
             </motion.button>
           )}
         </div>
 
         <motion.div 
-          className="flex flex-col md:items-end space-y-2 mt-4 md:mt-0"
+          className="flex flex-col md:items-end space-y-3 mt-4 md:mt-0"
           variants={itemVariants}
         >
-          <div className="flex space-x-4 justify-center md:justify-end">
+          <div className="flex space-x-3 justify-center md:justify-end">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -121,25 +123,25 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
             >
               <motion.button
                 onClick={() => setLang(lang === 'en' ? 'ru' : 'en')}
-                className="flex items-center px-3 py-2 rounded-md border border-resume-primary text-sm hover:bg-resume-primary hover:text-white dark:border-resume-muted dark:hover:bg-resume-muted dark:hover:text-gray-800 transition-colors duration-300"
+                className="language-toggle-button"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Globe className="h-4 w-4 mr-1" />
-                {lang === 'en' ? 'EN' : 'RU'}
+                <Globe className="h-4 w-4" />
+                <span className="font-semibold">{lang === 'en' ? 'EN' : 'RU'}</span>
               </motion.button>
             </motion.div>
 
             <motion.button
               onClick={toggleDarkMode}
-              className="p-2 rounded-md border border-resume-primary text-sm hover:bg-resume-primary hover:text-white dark:border-resume-muted dark:hover:bg-resume-muted dark:hover:text-gray-800 transition-colors duration-300"
+              className="theme-toggle-button"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </motion.button>
           </div>
 
@@ -148,7 +150,7 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
               href={`mailto:${data.contact.email}`}
               whileHover={{ scale: 1.1, y: -3 }}
               whileTap={{ scale: 0.9 }}
-              className="text-resume-primary dark:text-resume-muted hover:text-resume-accent dark:hover:text-white transition-colors"
+              className="text-ocean-500 dark:text-seagreen-400 hover:text-sunset-500 dark:hover:text-white transition-colors"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -161,7 +163,7 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1, y: -3 }}
               whileTap={{ scale: 0.9 }}
-              className="text-resume-primary dark:text-resume-muted hover:text-resume-accent dark:hover:text-white transition-colors"
+              className="text-ocean-500 dark:text-seagreen-400 hover:text-sunset-500 dark:hover:text-white transition-colors"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -174,7 +176,7 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1, y: -3 }}
               whileTap={{ scale: 0.9 }}
-              className="text-resume-primary dark:text-resume-muted hover:text-resume-accent dark:hover:text-white transition-colors"
+              className="text-ocean-500 dark:text-seagreen-400 hover:text-sunset-500 dark:hover:text-white transition-colors"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -201,13 +203,13 @@ const Header: React.FC<HeaderProps> = ({ data, lang, setLang, isDarkMode, toggle
               >
                 <motion.a
                   href={item.href}
-                  className="text-sm relative text-gray-600 hover:text-resume-primary dark:text-gray-300 dark:hover:text-resume-muted transition-colors py-2 px-1 block"
+                  className="text-sm relative text-gray-600 hover:text-ocean-500 dark:text-gray-300 dark:hover:text-seagreen-400 transition-colors py-2 px-1 block"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   {item.label}
                   <motion.span 
-                    className="absolute bottom-0 left-0 w-full h-0.5 bg-resume-primary dark:bg-resume-muted"
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-ocean-500 dark:bg-seagreen-400"
                     initial={{ scaleX: 0, originX: 0 }}
                     whileHover={{ scaleX: 1 }}
                     transition={{ duration: 0.3 }}
