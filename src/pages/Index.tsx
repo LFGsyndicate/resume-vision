@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import ParticlesBackground from '@/components/particles/ParticlesBackground';
 import Header from '@/components/Header';
+import SEOHead from '@/components/SEOHead';
 import SummarySection from '@/components/SummarySection';
 import ExperienceSection from '@/components/ExperienceSection';
 import SkillsSection from '@/components/SkillsSection/SkillsSection';
@@ -82,6 +83,7 @@ const Index = () => {
   
   return (
     <div className={`font-sans min-h-screen ${isDarkMode ? 'dark bg-gray-900' : 'bg-background'}`}>
+      <SEOHead lang={lang} />
       <ParticlesBackground isDarkMode={isDarkMode} />
       
       <div className="container mx-auto px-4 py-8 max-w-4xl relative z-10">
